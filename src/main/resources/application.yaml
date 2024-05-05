@@ -1,0 +1,26 @@
+#
+#logging:
+#    level:
+#      root: debug
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_schema: customers
+  flyway:
+    clean-disabled: true
+    baseline-on-migrate: true
+    enabled: true
+    locations: db/migration
+    create-schemas: true
+    default-schema: customers
+  datasource:
+    username: postgres
+    password: postgresql
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+  application:
+    name: demon
+server:
+  port: 8085
