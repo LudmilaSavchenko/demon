@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -31,9 +32,9 @@ public class Customers  {
     private String phoneNumber;
 
     @Column(name = "created_date", nullable = false)
-    private Date createdDate;
+    private LocalDate createdDate;
 
     @Column(name = "update_date", nullable = false)
-    private Date updateDate;
+    private LocalDate  updateDate;
 
 }
