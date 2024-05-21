@@ -4,10 +4,6 @@
 #      root: debug
 
 spring:
-  jpa:
-    properties:
-      hibernate:
-        default_schema: customers
   flyway:
     clean-disabled: true
     baseline-on-migrate: true
