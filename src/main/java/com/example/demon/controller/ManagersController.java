@@ -18,10 +18,20 @@ public class ManagersController {
         this.managersService = managersService;
     }
 
-    @GetMapping("/managers")
-    public List<String> getCustomers(){
+    @GetMapping()
+    public List<String> getManagers(){
         return managersService.findAll().stream()
                 .map(Managers::getFirstNameRu)
                 .toList();
+    }
+
+    @GetMapping("/findManagersByName")
+    public Object getCustomersByName(String fistName, String lastName){
+        if (managersService.isExistManagerByFirstNameRuAndLastNameRu(fistName, lastName)) {
+            return managersService.findByFirstNameRuAndLastNameRu(fistName,lastName);
+        }
+        else{
+            return "Нет менеджера по вашим критериям";
+        }
     }
 }

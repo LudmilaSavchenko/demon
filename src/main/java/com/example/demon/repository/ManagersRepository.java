@@ -10,4 +10,9 @@ public interface ManagersRepository extends JpaRepository<Managers, Long> {
     List<Managers> findAll();
     List<Managers> findTop1ByFirstNameRu(String fistName);
     Managers findTop1ByTimeZone(String timeZone);
+
+    List<Managers> findByFirstNameRuAndLastNameRu(String fistName, String lastName);
+
+
+
 }
