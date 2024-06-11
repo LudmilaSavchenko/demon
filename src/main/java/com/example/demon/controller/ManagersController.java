@@ -18,7 +18,7 @@ public class ManagersController {
         this.managersService = managersService;
     }
 
-    @GetMapping("/managers")
+    @GetMapping()
     public List<String> getCustomers(){
         return managersService.findAll().stream()
                 .map(Managers::getFirstNameRu)
