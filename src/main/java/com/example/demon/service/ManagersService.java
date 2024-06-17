@@ -16,6 +16,10 @@ public class ManagersService {
         this.managersRepository = managersRepository;
     }
 
+    public List<Managers> findAll() {
+        return managersRepository.findAll();
+    }
+
     public List<Managers> findTop1ByFirstNameRu(String fistName) {
         return managersRepository.findTop1ByFirstNameRu(fistName);
     }

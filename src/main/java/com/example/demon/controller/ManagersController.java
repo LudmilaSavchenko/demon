@@ -21,6 +21,7 @@ public class ManagersController {
                 .map(Managers::getFirstNameRu)
                 .toList();
     }
+
     @GetMapping("/findManagersByName")
     public List<String> getManagerByName(@RequestParam String firstName,
                                          @RequestParam String lastName){
