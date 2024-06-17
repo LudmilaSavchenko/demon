@@ -5,12 +5,10 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 
-
 @Entity
 @Table(name = "customers", schema = "customers")
 @Getter
 public class Customers {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

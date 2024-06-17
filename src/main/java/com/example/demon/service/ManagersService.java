@@ -4,19 +4,16 @@ import com.example.demon.domain.Managers;
 import com.example.demon.repository.ManagersRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ManagersService {
-    private final String MOSCOW_TIME_ZONE = "GMT+3";
+    private final static String MOSCOW_TIME_ZONE = "GMT+3";
     private final ManagersRepository managersRepository;
 
     public ManagersService(ManagersRepository managersRepository) {
         this.managersRepository = managersRepository;
-    }
-
-    public List<Managers>  findAll() {
-        return managersRepository.findAll();
     }
 
     public List<Managers> findTop1ByFirstNameRu(String fistName) {
@@ -27,28 +24,25 @@ public class ManagersService {
         return managersRepository.findTop1ByTimeZone(timeZone);
     }
 
-    public Object getManagerByTimeZone(String timeZone){
+    public Object getManagerByTimeZone(String timeZone) {
         Managers manager = findTop1ByTimeZone(timeZone);
-        if (manager == null ){
+        if (manager == null) {
             manager = findTop1ByTimeZone(MOSCOW_TIME_ZONE);
             return (manager != null) ? manager : "Менеджер не найден";
-        }
-        else{
+        } else {
             return manager;
         }
     }
 
-    public boolean isExistManagerByFirstNameRuAndLastNameRu(String fistName, String lastName){
-        List<Managers> managersList;
-        managersList = findByFirstNameRuAndLastNameRu(fistName,lastName);
-        if (managersList != null) {
-            return true;
+    public List<String> getManagerName(String firstName, String lastName) {
+        List<Managers> managersList = managersRepository.findByFirstNameRuAndLastNameRu(firstName, lastName);
+
+        if (managersList.isEmpty()) {
+            return List.of("Нет менеджера по вашим критериям");
         }
-        else {
-            return false;
-        }
-    }
-    public List<Managers> findByFirstNameRuAndLastNameRu(String fistName, String lastName){
-        return  managersRepository.findByFirstNameRuAndLastNameRu(fistName,lastName);
+
+        return managersList.stream()
+                .map(Managers::getFirstNameRu)
+                .toList();
     }
 }

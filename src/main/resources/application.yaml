@@ -24,3 +24,11 @@ spring:
     name: demon
 server:
   port: 8085
+
+  #logging:
+    #level:
+  #root: INFO
+    #pattern:
+  #console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    #file:
+  #name: /src/main/resources/logs/file.log

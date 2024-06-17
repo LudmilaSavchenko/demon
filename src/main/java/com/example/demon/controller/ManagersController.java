@@ -1,19 +1,16 @@
 package com.example.demon.controller;
 
-import com.example.demon.domain.Customers;
 import com.example.demon.domain.Managers;
 import com.example.demon.service.ManagersService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/managers")
 public class ManagersController {
     private final ManagersService managersService;
-
     public ManagersController(ManagersService managersService) {
         this.managersService = managersService;
     }
@@ -24,14 +21,10 @@ public class ManagersController {
                 .map(Managers::getFirstNameRu)
                 .toList();
     }
-
     @GetMapping("/findManagersByName")
-    public Object getCustomersByName(String fistName, String lastName){
-        if (managersService.isExistManagerByFirstNameRuAndLastNameRu(fistName, lastName)) {
-            return managersService.findByFirstNameRuAndLastNameRu(fistName,lastName);
-        }
-        else{
-            return "Нет менеджера по вашим критериям";
-        }
+    public List<String> getManagerByName(@RequestParam String firstName,
+                                         @RequestParam String lastName){
+        return managersService.getManagerName(firstName, lastName);
     }
+
 }
