@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ManagersRepository extends JpaRepository<Managers, Long> {
-    List<Managers> findAll();
-    List<Managers> findTop1ByFirstNameRu(String fistName);
-    Managers findTop1ByTimeZone(String timeZone);
+    List<Managers> findTop1ByTimeZone(String timeZone);
 }

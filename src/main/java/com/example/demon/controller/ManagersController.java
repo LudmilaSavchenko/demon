@@ -1,9 +1,9 @@
 package com.example.demon.controller;
 
-import com.example.demon.domain.Customers;
 import com.example.demon.domain.Managers;
 import com.example.demon.service.ManagersService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,5 +23,9 @@ public class ManagersController {
         return managersService.findAll().stream()
                 .map(Managers::getFirstNameRu)
                 .toList();
+    }
+    @GetMapping("/findManagerByTimeZone")
+    public List<String> getManagerByTimeZone(@RequestParam  String timeZone){
+        return managersService.getManagerByTimeZone(timeZone);
     }
 }

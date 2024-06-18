@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class ManagersService {
-    private final String MOSCOW_TIME_ZONE = "GMT+3";
+    private final static String MOSCOW_TIME_ZONE = "1";
     private final ManagersRepository managersRepository;
 
     public ManagersService(ManagersRepository managersRepository) {
@@ -19,21 +19,18 @@ public class ManagersService {
         return managersRepository.findAll();
     }
 
-    public List<Managers> findTop1ByFirstNameRu(String fistName) {
-        return managersRepository.findTop1ByFirstNameRu(fistName);
-    }
-
-    public Managers findTop1ByTimeZone(String timeZone) {
-        return managersRepository.findTop1ByTimeZone(timeZone);
-    }
-
-    public Managers getManagerByTimeZone(String timeZone){
-        Managers manager = findTop1ByTimeZone(timeZone);
-        if (manager == null ){
-            return findTop1ByTimeZone(MOSCOW_TIME_ZONE);
+    public List<String> getManagerByTimeZone(String timeZone){
+        List<Managers> managersList = managersRepository.findTop1ByTimeZone(timeZone);
+        if (managersList.isEmpty()){
+            managersList = managersRepository.findTop1ByTimeZone(MOSCOW_TIME_ZONE);
         }
-        else{
-            return manager;
+
+        if (managersList.isEmpty()){
+            return List.of("Нет менеджера по вашим критериям");
         }
+
+        return managersList.stream()
+                .map(Managers::getFirstNameRu)
+                .toList();
     }
 }
