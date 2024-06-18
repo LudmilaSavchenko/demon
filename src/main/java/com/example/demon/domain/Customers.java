@@ -1,19 +1,14 @@
 package com.example.demon.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.Table;
-import java.time.LocalDate;
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.Getter;
 
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "customers", schema = "customers")
-public class Customers  {
-
+@Getter
+public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,6 +30,12 @@ public class Customers  {
     private LocalDate createdDate;
 
     @Column(name = "update_date", nullable = false)
-    private LocalDate  updateDate;
+    private LocalDate updateDate;
 
+    @Override
+    public String toString() {
+        return "Customers{" +
+                "firstName='" + firstName + '\'' +
+                '}';
+    }
 }
