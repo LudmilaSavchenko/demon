@@ -26,12 +26,7 @@ public class ManagersController {
     }
 
     @GetMapping("/findManagersByName")
-    public Object getCustomersByName(String fistName, String lastName){
-        if (managersService.isExistManagerByFirstNameRuAndLastNameRu(fistName, lastName)) {
-            return managersService.findByFirstNameRuAndLastNameRu(fistName,lastName);
-        }
-        else{
-            return "Нет менеджера по вашим критериям";
-        }
+    public List<String> getCustomersByName(String fistName, String lastName){
+        return managersService.getManagerName(fistName, lastName);
     }
 }
